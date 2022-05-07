@@ -1,0 +1,101 @@
+﻿@model IQueryable<StudentCheck>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand">School system</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Index">Index</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="InsertStudent">Add Student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="ListStudents">List of Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Indexed">List of Students SQL</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Admin">Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <meta name="viewport" content="width=device-width" />
+    <title>Students</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    <tr class="text-center">
+        <center><h2>Admin Page</h2></center>
+        <table class="table table-sm table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Semester</th>
+                    <td />
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model?.Count() > 0)
+                {
+                    @foreach (StudentCheck s in Model)
+                    {
+                <tr>
+                    <td>@s.Name</td>
+                    <td>@s.Email</td>
+                    <td>@s.Phone</td>
+                    <td>@s.Semester</td>
+                    <td>
+                        <NavLink class="btn btn-info btn-sm"
+                                 href="@GetDetailsUrl(s.Name)">
+                            Details
+                        </NavLink>
+                        <NavLink class="btn btn-warning btn-sm"
+                                 href="@GetEditUrl(s.Name)">
+                            Edit
+                        </NavLink>
+                    </td>
+                </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center">No Products</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <NavLink class="btn btn-primary" href="/admin/products/create">Create</NavLink>
+        Chapter 10 ■ SportsStore: Administration
+        225
+        @code {
+        public IStoreRepository Repository => Service;
+        public IEnumerable
+        <Product>
+            ProductData { get; set; }
+            protected async override Task OnInitializedAsync() {
+            await UpdateData();
+            }
+            public async Task UpdateData() {
+            ProductData = await Repository.Products.ToListAsync();
+            }
+            public string GetDetailsUrl(long id) => $"/admin/products/details/{id}";
+            public string GetEditUrl(long id) => $"/admin/products/edit/{id}";
+            }
+</body>
+</html>

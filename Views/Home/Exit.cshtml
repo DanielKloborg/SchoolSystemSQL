@@ -1,0 +1,43 @@
+﻿@model School.Models.StudentCheck
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand">School system</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Index">Index</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="InsertStudent">Add Student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="ListStudents">List of Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Indexed">List of Students SQL</a>
+                    </li>
+                </ul>
+            </div>
+          </div>
+        </nav>
+        <meta name="viewport" content="width=device-width" />
+        <title>Thanks</title>
+        <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    </head>
+    <body class="text-center"> 
+        <div>
+            <h1>You have now added, @Model.Name!</h1>
+        </div>
+        Click <a asp-action="ListStudents">here</a> to see Students.
+        Click <a asp-action="Index">here</a> to go back.
+    </body>
+</html>
